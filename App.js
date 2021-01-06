@@ -1,127 +1,46 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, StatusBar, View } from 'react-native';
-import { AppRegistry, Button, Text } from 'react-native';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import * as firebase from 'firebase';
-import 'firebase/auth';
-
-// componentes
-import { UserProvider } from './components/Users/userContext';
-import useUser from './components/Users/useUser';
-import MyTabs from './components/MenuBar/TabBar';
-import UnderConstruction from "./components/UnderConstruction";
-import CreateEvent from './components/Event/EventCrud/CreateEvent';
-import EventCard from './components/Event/EventCard';
-import EventDetail from './components/Event/EventDetail/EventDetail';
-import EditEvent from './components/Event/EventCrud/EditEvent';
-import DeleteEditEvent from './components/Event/EventCrud/DeleteEditEvent';
-import HeaderTab from './components/Header/HeaderTab';
-import Home from './components/Home';
-import Calendario from './components/Calendario';
+import React, { useEffect } from "react";
+import { StyleSheet, StatusBar, View } from "react-native";
+import EventCard from "./components/Event/EventCard";
+import EventDetail from "./components/Event/EventDetail/EventDetail";
+import { AppRegistry, Button } from "react-native";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import CreateEvent from "./components/Event/EventCrud/CreateEvent";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 // import UserList from "./components/Users/UsersList";
-import Login from './components/Users/Login';
-import ChatCard from './components/Chat/ChatCard';
-import ChatDetail from './components/Chat/ChatDetail';
-import UsersList from './components/Chat/UsersList';
-import InterestLinks from './components/LinkInteres/InterestLinks';
-import createLinks from './components/LinkInteres/CrudLink';
-import AgregarTarea from './components/Calendario/AgregarTarea';
-import FechaSeleccionada from './components/Calendario/FechaSeleccionada';
-import UserPromote from './components/AdminPanel/UserPromote';
+import { UserProvider } from "./components/Users/userContext";
+import * as firebase from "firebase";
+import "firebase/auth";
+import useUser from "./components/Users/useUser";
+import MyTabs from "./components/MenuBar/TabBar";
+// import UnderConstruction from "./components/UnderConstruction";
+import HeaderTab from "./components/Header/HeaderTab";
+import Home from "./components/Home";
+import Calendario from "./components/Calendario";
+import Login from "./components/Users/Login";
+import ChatCard from "./components/Chat/ChatCard";
+import ChatDetail from "./components/Chat/ChatDetail";
+import UsersList from "./components/Chat/UsersList";
+import DeleteEditEvent from "./components/Event/EventCrud/DeleteEditEvent";
+import UserPromote from "./components/AdminPanel/UserPromote";
+import createLinks from "./components/LinkInteres/CrudLink";
+import InterestLinks from "./components/LinkInteres/InterestLinks";
+import AgregarTarea from "./components/Calendario/AgregarTarea";
+import FechaSeleccionada from "./components/Calendario/FechaSeleccionada";
+import EditEvent from "./components/Event/EventCrud/EditEvent";
 
-import AdminPanel from './components/AdminPanel/AdminPanel';
+// import SideBar from "./components/SideBaar/index";
 
-// import SideBar from './components/SideBar/index';
-import DrawerNavigator from './components/SideBar/index';
-
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
-// const Stack = createStackNavigator();
-const HomeStack = createStackNavigator();
-const Drawer = createDrawerNavigator();
-
-const HomeStackScreen = ({ navigation }) => {
-  <HomeStack.Navigator
-    initialRouteName="Tab"
-    screenOptions={{
-      cardStyle: {
-        backgroundColor: '#fff'
-      },
-      headerStyle: {
-        backgroundColor: '#009387'
-      },
-      headerTintColor: '#fff',
-      headerTintiStyle: {
-        fontWeight: 'bold'
-      }
-    }}>
-    // name="Home" component={Home}
-    <HomeStack.Screen
-      name="Home"
-      component={Home}
-      options={{ headerShown: false }}
-    />
-    // name="Calendario" component={Calendario}
-    <HomeStack.Screen
-      name="Calendar"
-      component={Calendario}
-      options={{ headerShown: false }}
-    />
-    // name="Eventos" component={EventCard}
-    <HomeStack.Screen
-      name="Event"
-      component={EventCard}
-      options={{ headerShown: false }}
-    />
-    // name="Congresos" component={UnderConstruction}
-    <HomeStack.Screen
-      name="Congresos"
-      component={UnderConstruction}
-      options={{ headerShown: false }}
-    />
-    // name="Links de interes" component={InterestLinks}
-    <HomeStack.Screen
-      name="Links de interes"
-      component={InterestLinks}
-      options={{ headerShown: false }}
-    />
-    // name="Perfil" component={UnderConstruction}
-    <HomeStack.Screen
-      name="Perfil"
-      component={UnderConstruction}
-      options={{ headerShown: false }}
-    />
-    // name="AdminPanel" component={AdminPanel}
-    <HomeStack.Screen
-      name="Admin Panel"
-      component={AdminPanel}
-      options={{ headerShown: false }}
-    />
-    // name="Chat" component={ChatCard}
-    <HomeStack.Screen
-      name="Chat"
-      component={ChatCard}
-      options={{ headerShown: false }}
-    />
-    <HomeStack.Screen
-      name="Tab"
-      component={MyTabs}
-      options={{ headerShown: false }}
-    />
-
-  </HomeStack.Navigator>;
-};
+const Stack = createStackNavigator();
 
 var firebaseConfig = {
-  apiKey: 'AIzaSyBRutCUmn2wHrUAMzbM-5ESVsGxO2UEwQE',
-  authDomain: 'visitar-test.firebaseapp.com',
-  projectId: 'visitar-test',
-  storageBucket: 'visitar-test.appspot.com',
-  messagingSenderId: '960314269839',
-  appId: '1:960314269839:web:c9130a27fd6f5848ac50fa',
-  measurementId: 'G-8Y4DCJFJ5Z',
+  apiKey: "AIzaSyBRutCUmn2wHrUAMzbM-5ESVsGxO2UEwQE",
+  authDomain: "visitar-test.firebaseapp.com",
+  projectId: "visitar-test",
+  storageBucket: "visitar-test.appspot.com",
+  messagingSenderId: "960314269839",
+  appId: "1:960314269839:web:c9130a27fd6f5848ac50fa",
+  measurementId: "G-8Y4DCJFJ5Z",
 };
 
 if (!firebase.apps.length) {
@@ -132,9 +51,8 @@ if (!firebase.apps.length) {
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  //web
-  uri: 'https://visitar-ar.herokuapp.com/graphql',
-  //uri: "http://192.168.1.26:3002/graphql", //Leandro
+  //maquina virtual
+  uri: "http://104.131.68.84:3002/graphql",
   cache: new InMemoryCache(),
 });
 
@@ -142,11 +60,11 @@ const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: 'white',
+    background: "white",
   },
 };
 
-function App({ navigation }) {
+function App() {
   const { user, setUser } = useUser();
   useEffect(() => {
     const unsuscribe = firebase
@@ -158,38 +76,115 @@ function App({ navigation }) {
   return (
     <View
       style={{
-        height: '100%',
+        height: "100%",
         marginTop: StatusBar.currentHeight,
-        width: '100%',
-        display: 'flex',
-      }}>
+        width: "100%",
+        display: "flex",
+      }}
+    >
       <ApolloProvider client={client}>
         {user === null ? (
           <Login />
         ) : (
-          <NavigationContainer theme={MyTheme}>
+          <NavigationContainer theme={MyTheme} independent={true}>
             <Button
               color="#7C88D5"
               onPress={() => firebase.auth().signOut()}
               title="Cerrar sesión"
             />
+            <Stack.Navigator
+              initialRouteName="Tab"
+              screenOptions={{
+                cardStyle: { backgroundColor: "#fff" },
+              }}
+            >
+              <Stack.Screen
+                name="CreateEvent"
+                component={CreateEvent}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Top"
+                component={HeaderTab}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Calendar"
+                component={Calendario}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Chat"
+                component={ChatCard}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="UsersList"
+                component={UsersList}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="ChatDetail"
+                component={ChatDetail}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Tab"
+                component={MyTabs}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Event"
+                component={EventCard}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Detail"
+                component={EventDetail}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="DeleteEditEvent"
+                component={DeleteEditEvent}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="UserPromote"
+                component={UserPromote}
+                options={{ headerShown: false }}
+              />
 
-            <Button 
-              title="side de mierda"
-              color="#7C88D5"
-              onPress={ () => alert('avber')}>
-            </Button>
-
-            <Drawer.Navigator initialRouteName="Home">
-              <Drawer.Screen name="Home" component={Home} />
-              <Drawer.Screen name="Calendario" component={Calendario} />
-              <Drawer.Screen name="Eventos" component={EventCard} />
-              <Drawer.Screen name="Congresos" component={UnderConstruction} />
-              <Drawer.Screen name="Links de interes" component={InterestLinks} />
-              <Drawer.Screen name="Perfil" component={UnderConstruction} />
-              <Drawer.Screen name="Admin Panel" component={AdminPanel} />
-              <Drawer.Screen name="Chat" component={ChatCard} />
-            </Drawer.Navigator>
+              <Stack.Screen
+                name="AgregarTarea"
+                component={AgregarTarea}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="createLinks"
+                component={createLinks}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="InterestLinks"
+                component={InterestLinks}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="EditEvent"
+                component={EditEvent}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="FechaSeleccionada"
+                component={FechaSeleccionada}
+                options={{ headerShown: false }}
+              />
+            </Stack.Navigator>
           </NavigationContainer>
         )}
       </ApolloProvider>
@@ -208,7 +203,7 @@ export default function () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#98e6fa',
+    backgroundColor: "#98e6fa",
     marginTop: 300,
     marginBottom: 100,
     marginLeft: 10,
@@ -216,13 +211,13 @@ const styles = StyleSheet.create({
     height: 10,
     /*width: 400,*/
     borderRadius: 500,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   text: {
-    color: 'red',
+    color: "red",
     fontSize: 30,
   },
 });
 
-AppRegistry.registerComponent('MyApplication', () => App);
+AppRegistry.registerComponent("MyApplication", () => App);

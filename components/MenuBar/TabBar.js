@@ -8,14 +8,14 @@ import EventCard from "../Event/EventCard";
 import Calendar from "../Calendario/index";
 
 // import UnderConstruction from "../UnderConstruction";
-import Home from "../Home";
+// import Home from "../Home";
 import HomeIcon from "../images/HomeIcon";
 import ChatCard from "../Chat/ChatCard";
 import AdminIcon from "../images/AdminIcon";
 import AdminPanel from "../AdminPanel/AdminPanel";
 import InterestLinks from ".././LinkInteres/InterestLinks";
 
-import SideBar from "../SideBar/index";
+import SideBar from "../SideBaar/index";
 
 const Tab = createBottomTabNavigator();
 
@@ -35,12 +35,21 @@ export default function MyTabs() {
         },
       }}
     >
-      <Tab.Screen name="SideBar" component={SideBar} />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Home"
         component={Home}
         options={{
           tabBarLabel: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <HomeIcon name="home" color="white" size="32" />
+          ),
+        }}
+      /> */}
+      <Tab.Screen
+        name="SideBar"
+        component={SideBar}
+        options={{
+          tabBarLabel: "SideBar",
           tabBarIcon: ({ color, size }) => (
             <HomeIcon name="home" color="white" size="32" />
           ),

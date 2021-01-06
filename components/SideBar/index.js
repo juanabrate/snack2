@@ -1,16 +1,13 @@
 import * as React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { NavigationContainer, DrawerActions } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-// import BurgerMenu from "../images/BurgerMenuIcon";
 
 import Home from "../Home";
 import Cal from "../Calendario";
 import Congresos from "../Event/EventCard";
-// import CongresosDetail from "../Event/EventDetail/EventDetail";
 import UnderConstruction from "../UnderConstruction";
 import Links from "../LinkInteres/InterestLinks";
-// import MenuBar from "../MenuBar/MenuBar";
 import AdminPanel from "../AdminPanel/AdminPanel";
 import Chat from "../Chat/ChatCard";
 
@@ -21,14 +18,12 @@ function Menu({ navigation }) {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: '#7C88D5',
-        position: 'absolute'
+        backgroundColor: "#7C88D5",
+        position: "absolute",
       }}
     >
-      <Button
+      <TouchableOpacity
         // marginTop="10px"
-        color="#7C88D5"
-        title="side"
         onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
       />
     </View>
@@ -38,28 +33,24 @@ function Menu({ navigation }) {
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      {/* <Text>Home?</Text> */}
       {Menu({ navigation })}
       <Home />
-      {/* <MenuBar /> */}
     </View>
   );
 }
 
 function CalendarioScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View>
       {Menu({ navigation })}
-      <Text>Calendario</Text>
       <Cal />
-      {/* <MenuBar /> */}
     </View>
   );
 }
 
 function CongresosScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View>
       <Text>Congresos</Text>
       {Menu({ navigation })}
       <Congresos />
@@ -70,31 +61,27 @@ function CongresosScreen({ navigation }) {
 
 function LinksScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View>
       {Menu({ navigation })}
-      <Text>Links de inteŕes</Text>
+      <Text>Links de interés</Text>
       <Links />
-      {/* <MenuBar /> */}
     </View>
   );
 }
 
 function ProfileScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View>
       {Menu({ navigation })}
-      <Text>Mi perfil</Text>
       <UnderConstruction />
-      {/* <MenuBar /> */}
     </View>
   );
 }
 
 function AdminPanelScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View>
       {Menu({ navigation })}
-      <Text>Panel de Administrador</Text>
       <AdminPanel />
     </View>
   );
@@ -102,9 +89,8 @@ function AdminPanelScreen({ navigation }) {
 
 function ChatScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View>
       {Menu({ navigation })}
-      <Text>Chats</Text>
       <Chat />
     </View>
   );
@@ -115,7 +101,6 @@ const Drawer = createDrawerNavigator();
 function DrawerNavigator() {
   return (
     <Drawer.Navigator>
-      {/* Hola "Nombre" */}
       <Drawer.Screen name="Home" component={HomeScreen} />
       <Drawer.Screen name="Congresos" component={CongresosScreen} />
       <Drawer.Screen name="Calendario" component={CalendarioScreen} />
@@ -123,20 +108,14 @@ function DrawerNavigator() {
       <Drawer.Screen name="Perfil" component={ProfileScreen} />
       <Drawer.Screen name="AdminPanel" component={AdminPanelScreen} />
       <Drawer.Screen name="Chat" component={ChatScreen} />
-
-      {/*
-      User
-      Configuración(notificaciones push) */}
     </Drawer.Navigator>
   );
 }
 
-export default DrawerNavigator;
-
-// export default function App() {
-//   return (
-//     <NavigationContainer>
-//       <DrawerNavigator />
-//     </NavigationContainer>
-//   );
-// }
+export default function App() {
+  return (
+    <NavigationContainer independent={true}>
+      <DrawerNavigator />
+    </NavigationContainer>
+  );
+}
